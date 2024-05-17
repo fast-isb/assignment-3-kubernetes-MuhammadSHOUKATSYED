@@ -1,6 +1,9 @@
 # Use a base image with Node.js
 FROM node:14-alpine
 
+# Install Python
+RUN apk add --no-cache python3
+
 # Set working directory
 WORKDIR /app
 
@@ -13,8 +16,11 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Expose port
-EXPOSE 8000
+# Build the React app
+RUN npm run build
 
-# Command to run the backend
+# Expose port
+EXPOSE 3000
+
+# Command to run the application
 CMD ["npm", "start"]
