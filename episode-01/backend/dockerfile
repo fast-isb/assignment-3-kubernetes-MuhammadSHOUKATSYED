@@ -1,8 +1,8 @@
 # Use a base image with Node.js
 FROM node:14-alpine
 
-# Install Python
-RUN apk add --no-cache python3
+# Install necessary build dependencies
+RUN apk add --no-cache python3 make g++
 
 # Set working directory
 WORKDIR /app
@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --quiet --no-progress --no-color
 
 # Copy source code
 COPY . .
